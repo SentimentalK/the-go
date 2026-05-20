@@ -12,9 +12,10 @@ References:
 package main
 
 import (
+	"encoding/csv"
 	"fmt"
 	"os"
-	"encoding/csv"
+	"project01/model"
 )
 
 func main() {
@@ -24,36 +25,7 @@ func main() {
 	var filePath string = "./data/Prey collection & analysis - raw data.csv"
 	// Constrants
 	const studentID = "041164952"
-
-	// Go does not have classes or "objects" as defined by languages like Java
-	// A struct is strictly a composite data type—a blueprint for a block of memory 
-	// containing a collection of named fields.
-	type PreyRecord struct {
-		Year                string
-		Species             string
-		CommonName          string
-		StudySite           string
-		AssociatedCommunity string
-		Retinol             string
-	}
-	// Create an instance of the struct
-	record := PreyRecord{
-		Year:                "2024",
-		Species:             "Salvelinus alpinus",
-		CommonName:          "Arctic char",
-		StudySite:           "Example Site",
-		AssociatedCommunity: "Example Community",
-		Retinol:             "12.5",
-	}
-	// slice
-	records := []PreyRecord{}
-	records = append(records, record)
-	// Print in loop
-	for index, record := range records {
-		fmt.Println("Record", index+1)
-		fmt.Println("Year:", record.Year)
-		fmt.Println("Species:", record.Species)
-	}
+	records := []model.PreyRecord{}
 
 	// Open File
 	file, err := os.Open(filePath)
@@ -70,12 +42,12 @@ func main() {
 		return
 	}
 
-	// Print the first row
+	limit := 5
 	for index, row := range rows {
 		if index < 1 {
 			continue
 		}
-		record := PreyRecord{
+		record := model.PreyRecord{
 			Year:                row[0],
 			Species:             row[1],
 			CommonName:          row[2],
@@ -84,16 +56,22 @@ func main() {
 			Retinol:             row[5],
 		}
 		records = append(records, record)
-		break
+		if index >= limit {
+			break
+		}
 	}
 
-	fmt.Println(studentName, ":",studentID)
-	fmt.Println("Total records read:", len(records)-1)
-	fmt.Println("Year:", records[1].Year)
-	fmt.Println("Species:", records[1].Species)
-	fmt.Println("Common Name:", records[1].CommonName)
-	fmt.Println("Study Site:", records[1].StudySite)
-	fmt.Println("Associated Community:", records[1].AssociatedCommunity)
-	fmt.Println("Retinol:", records[1].Retinol)
+	fmt.Println(studentName, ":", studentID)
+	fmt.Println("Total records read:", len(records))
+	fmt.Println("---")
+	for _, record := range records {
+		fmt.Println("Year:", record.Year)
+		fmt.Println("Species:", record.Species)
+		fmt.Println("Common Name:", record.CommonName)
+		fmt.Println("Study Site:", record.StudySite)
+		fmt.Println("Associated Community:", record.AssociatedCommunity)
+		fmt.Println("Retinol:", record.Retinol)
+		fmt.Println("---")
+	}
 
 }
