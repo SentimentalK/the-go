@@ -8,6 +8,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"encoding/csv"
 )
 
 func main() {
@@ -48,7 +50,26 @@ func main() {
 		fmt.Println("Species:", record.Species)
 	}
 
+	// Open File
+	file, err := os.Open(filePath)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
 
-	fmt.Println(filePath)
+	// read csv file
+	rows, err := csv.NewReader(file).ReadAll()
+	if err != nil {
+		fmt.Println("Error reading CSV file:", err)
+		return
+	}
+
+	// Print the first row
+	for _, row := range rows {
+		fmt.Println(row)
+		break
+	}
+
 	fmt.Println(studentName, ":",studentID)
 }
