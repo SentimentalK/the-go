@@ -2,6 +2,11 @@
 Author: Xinghan Xu
 Course: CST8002 Programming Language Research Project
 Professor: Stanley Pieda
+
+References:
+[1] The Go Authors, "Package csv," pkg.go.dev. [Online]. Available: https://pkg.go.dev/encoding/csv. [Accessed: May 2026].
+[2] The Go Authors, "Package os," pkg.go.dev. [Online]. Available: https://pkg.go.dev/os. [Accessed: May 2026].
+[3] Fisheries and Oceans Canada, "Spatiotemporal variation in anadromous Arctic char..." open.canada.ca. [Online]. Available: https://open.canada.ca/data/en/dataset/9cbcf710-a2a1-11ef-8ccf-55cc7f028297. [Accessed: Apr. 30, 2026].
 */
 
 package main
@@ -66,10 +71,29 @@ func main() {
 	}
 
 	// Print the first row
-	for _, row := range rows {
-		fmt.Println(row)
+	for index, row := range rows {
+		if index < 1 {
+			continue
+		}
+		record := PreyRecord{
+			Year:                row[0],
+			Species:             row[1],
+			CommonName:          row[2],
+			StudySite:           row[3],
+			AssociatedCommunity: row[4],
+			Retinol:             row[5],
+		}
+		records = append(records, record)
 		break
 	}
 
 	fmt.Println(studentName, ":",studentID)
+	fmt.Println("Total records read:", len(records)-1)
+	fmt.Println("Year:", records[1].Year)
+	fmt.Println("Species:", records[1].Species)
+	fmt.Println("Common Name:", records[1].CommonName)
+	fmt.Println("Study Site:", records[1].StudySite)
+	fmt.Println("Associated Community:", records[1].AssociatedCommunity)
+	fmt.Println("Retinol:", records[1].Retinol)
+
 }
