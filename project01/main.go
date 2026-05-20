@@ -12,53 +12,23 @@ References:
 package main
 
 import (
-	"encoding/csv"
 	"fmt"
-	"os"
-	"project01/model"
+	"project01/utils"
 )
 
+// main reads a fixed number of prey records from the CSV file and prints them.
 func main() {
 	// Automatically detect type of variable based on assigned value
 	studentName := "Xinghan Xu"
 	// Explicitly declare type of variable
 	var filePath string = "./data/Prey collection & analysis - raw data.csv"
-	// Constrants
+	// Constants
 	const studentID = "041164952"
-	records := []model.PreyRecord{}
 
-	// Open File
-	file, err := os.Open(filePath)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return
-	}
-	defer file.Close()
-
-	// read csv file
-	rows, err := csv.NewReader(file).ReadAll()
+	records, err := utils.ReadLinesFor(5, filePath)
 	if err != nil {
 		fmt.Println("Error reading CSV file:", err)
 		return
-	}
-
-	limit := 5
-	for index, row := range rows {
-		if index < 1 {
-			continue
-		}
-		record := model.PreyRecord{
-			Year:                row[0],
-			Species:             row[1],
-			CommonName:          row[2],
-			StudySite:           row[3],
-			AssociatedCommunity: row[4],
-			Retinol:             row[5],
-		}
-		records = append(records, record)
-		if index >= limit {
-			break
-		}
 	}
 
 	fmt.Println(studentName, ":", studentID)

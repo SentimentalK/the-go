@@ -6,6 +6,7 @@ COPY main.go .
 COPY go.mod .
 COPY data ./data
 COPY model ./model
+COPY utils ./utils
 
 RUN go build -o proj1 .
 
