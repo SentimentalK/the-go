@@ -3,13 +3,11 @@ Author: Xinghan Xu
 Course: CST8002 Programming Language Research Project
 
 References:
-[1] The Go Authors, “Package os,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/os.
-    [Accessed: May 25, 2026].
+[1] The Go Authors. (n.d.). Package os. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/os [Accessed on: May 25, 2026].
 
-[2] The Go Authors, “Package filepath,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/path/filepath.
-    [Accessed: May 25, 2026].
+[2] The Go Authors. (n.d.). Package filepath. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/path/filepath [Accessed on: May 25, 2026].
 */
 
 package file

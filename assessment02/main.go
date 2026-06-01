@@ -3,25 +3,20 @@ Author: Xinghan Xu
 Course: CST8002 Programming Language Research Project
 
 References:
-[1] The Go Authors, “Package fmt,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/fmt.
-    [Accessed: May 25, 2026].
+[1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/fmt [Accessed on: May 25, 2026].
 
-[2] The Go Authors, “Package bufio,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/bufio.
-    [Accessed: May 25, 2026].
+[2] The Go Authors. (n.d.). Package bufio. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/bufio [Accessed on: May 25, 2026].
 
-[3] The Go Authors, “Package os,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/os.
-    [Accessed: May 25, 2026].
+[3] The Go Authors. (n.d.). Package os. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/os [Accessed on: May 25, 2026].
 
-[4] The Go Authors, “Package strings,” Go Packages.
-    [Online]. Available: https://pkg.go.dev/strings.
-    [Accessed: May 25, 2026].
+[4] The Go Authors. (n.d.). Package strings. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/strings [Accessed on: May 25, 2026].
 
-[5] The Go Authors, “How to Write Go Code,” The Go Programming Language.
-    [Online]. Available: https://go.dev/doc/code.
-    [Accessed: May 25, 2026].
+[5] The Go Authors. (n.d.). How to Write Go Code. go.dev.
+    [online]. Available at https://go.dev/doc/code [Accessed on: May 25, 2026].
 */
 
 // Package main demonstrates a small console program written in Go.
