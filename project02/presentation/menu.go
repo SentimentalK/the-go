@@ -1,15 +1,16 @@
 package presentation
 
 import (
+	"fmt"
 	"project02/business"
-	"project02/model"
+	"project02/presentation/user"
 )
 
 func MenuLoop() {
-	userInput := NewConsoleInput()
+	userInput := user.NewConsoleInput()
 
+	fmt.Println("\nProgram by Xinghan Xu")
 	for {
-		fmt.Println("\nProgram by Xinghan Xu")
 		fmt.Println("1. Reload data from dataset")
 		fmt.Println("2. Save current data to new CSV file")
 		fmt.Println("3. Display records")
@@ -24,29 +25,27 @@ func MenuLoop() {
 			return
 		}
 
-		var records []model.PreyRecord
-
 		switch choice {
-			case 1:
-				records, _ = business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
-			case 2:
-				business.SavePreyRecords(records)
-			case 3:
-				index, _ := userInput.GetNumber("Please enter the index of the record to display: ")
-				business.DisplayPreyRecords(index, records)
-			case 4:
-				business.AppendPreyRecord()
-			case 5:
-				index, _ := userInput.GetNumber("Please enter the index of the record to edit: ")
-				business.EditPreyRecord(index)
-			case 6:
-				index, _ := userInput.GetNumber("Please enter the index of the record to delete: ")
-				business.DeletePreyRecord(index)
-			case 7:
-				fmt.Println("Exiting program.")
-				return
-			default:
-				fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
+		case 1:
+			business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
+		case 2:
+			business.SavePreyRecords()
+		case 3:
+			index, _ := userInput.GetNumber("Please enter the index of the record to display: ")
+			business.DisplayPreyRecords(index)
+		case 4:
+			business.AppendPreyRecord()
+		case 5:
+			index, _ := userInput.GetNumber("Please enter the index of the record to edit: ")
+			business.EditPreyRecord(index)
+		case 6:
+			index, _ := userInput.GetNumber("Please enter the index of the record to delete: ")
+			business.DeletePreyRecord(index)
+		case 7:
+			fmt.Println("Exiting program.")
+			return
+		default:
+			fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
 		}
 	}
 }

@@ -2,25 +2,44 @@ package business
 
 import (
 	"fmt"
-	"bufio"
-	"strings"
 	"project02/model"
 	"project02/persistence"
+	"project02/presentation/user"
 )
 
-func (prey *Prey) LoadPreyRecords(filePath string) ([]model.PreyRecord, error) {
-	return persistence.ReadLinesFor(100, filePath)
+type Prey struct {
+	Records []model.PreyRecord
 }
 
-func (prey *Prey) SavePreyRecords() error {
+var prey = &Prey{}
+var userInput = user.NewConsoleInput()
+
+func LoadPreyRecords(filePath string) ([]model.PreyRecord, error) {
+	records, err := persistence.ReadLinesFor(100, filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	prey.Records = records
+	fmt.Printf("%d records loaded.\n", len(records))
+	return records, nil
+}
+
+func SavePreyRecords() error {
+	if prey.Records == nil {
+		return fmt.Errorf("no records to save")
+	}
+
 	return persistence.WriteToCSV(prey.Records)
 }
 
-func (prey *Prey) DisplayPreyRecords(index int) {
+func DisplayPreyRecords(index int) {
+
 	if index < 1 || index > len(prey.Records) {
 		fmt.Printf("Invalid index. Please enter a number between 1 and %d.\n", len(prey.Records))
 		return
 	}
+
 	record := prey.Records[index-1]
 	fmt.Printf("Record %d:\n", index)
 	fmt.Printf("Year: %s\n", record.Year)
@@ -31,33 +50,40 @@ func (prey *Prey) DisplayPreyRecords(index int) {
 	fmt.Printf("Retinol: %s\n", record.Retinol)
 }
 
-func (prey *Prey, userInput *presentation.ConsoleInput) CreatePreyRecord() model.PreyRecord {
+func CreatePreyRecord() model.PreyRecord {
 	var record model.PreyRecord
-	record.Year = userInput.GetText("Enter Year: ")
-	record.Species = userInput.GetText("Enter Species: ")
-	record.CommonName = userInput.GetText("Enter Common Name: ")
-	record.StudySite = userInput.GetText("Enter Study Site: ")
-	record.AssociatedCommunity = userInput.GetText("Enter Associated Community: ")
-	record.Retinol = userInput.GetText("Enter Retinol: ")
+
+	record.Year, _ = userInput.GetText("Enter Year: ")
+	record.Species, _ = userInput.GetText("Enter Species: ")
+	record.CommonName, _ = userInput.GetText("Enter Common Name: ")
+	record.StudySite, _ = userInput.GetText("Enter Study Site: ")
+	record.AssociatedCommunity, _ = userInput.GetText("Enter Associated Community: ")
+	record.Retinol, _ = userInput.GetText("Enter Retinol: ")
 
 	return record
 }
 
-func (prey *Prey) AppendPreyRecord() {
-	record := CreatePreyRecord(userInput)
+func AppendPreyRecord() {
+	record := CreatePreyRecord()
 	prey.Records = append(prey.Records, record)
 }
 
-func (prey *Prey) EditPreyRecord(index int) {
+func EditPreyRecord(index int) {
+	if index < 1 || index > len(prey.Records) {
+		fmt.Printf("Invalid index. Please enter a number between 1 and %d.\n", len(prey.Records))
+		return
+	}
+
 	DisplayPreyRecords(index)
 	newRecord := CreatePreyRecord()
 	prey.Records[index-1] = newRecord
 }
 
-func (prey *Prey) DeletePreyRecord(index int) {
+func DeletePreyRecord(index int) {
 	if index < 1 || index > len(prey.Records) {
 		fmt.Printf("Invalid index. Please enter a number between 1 and %d.\n", len(prey.Records))
 		return
 	}
+
 	prey.Records = append(prey.Records[:index-1], prey.Records[index:]...)
 }
