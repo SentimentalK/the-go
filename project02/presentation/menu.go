@@ -1,14 +1,14 @@
 package presentation
 
-import(
-	"fmt"
+import (
 	"bufio"
+	"fmt"
 	"os"
+	"project02/business"
 	"strings"
-	"business"
 )
 
-func menuLoop() {
+func MenuLoop() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
@@ -33,23 +33,25 @@ func menuLoop() {
 			fmt.Println("Invalid input. Please enter a number.")
 			continue
 		}
-	}
 
-	case 1:
-		business.LoadPreyRecords("data/prey_records.csv")
-	case 2:
-		business.SavePreyRecords("data/prey_records.csv", nil)
-	case 3:
-		business.DisplayPreyRecords(nil)
-	case 4:
-		business.CreatePreyRecord()
-	case 5:
-		business.EditPreyRecord(nil)
-	case 6:
-		business.DeletePreyRecord(nil, 0)
-	case 7:
-		fmt.Println("Exiting program.")
-		return
-	default:
-		fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
+		switch choice {
+		case 1:
+			business.LoadPreyRecords("data/prey_records.csv")
+		case 2:
+			business.SavePreyRecords("data/prey_records.csv", nil)
+		case 3:
+			business.DisplayPreyRecords(nil)
+		case 4:
+			business.CreatePreyRecord()
+		case 5:
+			business.EditPreyRecord(nil)
+		case 6:
+			business.DeletePreyRecord(nil, 0)
+		case 7:
+			fmt.Println("Exiting program.")
+			return
+		default:
+			fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
+		}
+	}
 }
