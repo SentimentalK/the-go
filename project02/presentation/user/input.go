@@ -2,6 +2,7 @@
 Author: Xinghan Xu
 Course: CST8002 Programming Language Research Project
 Professor: Stanley Pieda
+Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package bufio. pkg.go.dev.
@@ -15,6 +16,9 @@ References:
 
 [4] The Go Authors. (n.d.). Package strings. pkg.go.dev.
     [online]. Available at https://pkg.go.dev/strings [Accessed on: May 2026].
+
+[5] The Go Authors. (n.d.). Package strconv. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/strconv [Accessed on: May 2026].
 */
 
 package user
@@ -23,6 +27,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -55,6 +60,34 @@ func (input *ConsoleInput) GetNumber(prompt string) (int, error) {
 		}
 
 		return number, nil
+	}
+}
+
+// GetNumbers prompts the user for one or more comma-separated integers.
+func (input *ConsoleInput) GetNumbers(prompt string) ([]int, error) {
+	for {
+		text, err := input.GetText(prompt)
+		if err != nil {
+			return nil, err
+		}
+
+		parts := strings.Split(text, ",")
+		numbers := []int{}
+		valid := true
+
+		for _, part := range parts {
+			number, err := strconv.Atoi(strings.TrimSpace(part))
+			if err != nil {
+				fmt.Println("Invalid input. Please enter numbers separated by commas.")
+				valid = false
+				break
+			}
+			numbers = append(numbers, number)
+		}
+
+		if valid {
+			return numbers, nil
+		}
 	}
 }
 

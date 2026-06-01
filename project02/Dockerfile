@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN go test ./...
 RUN go build -o proj2 .
 
 CMD ["./proj2"]

@@ -2,6 +2,7 @@
 Author: Xinghan Xu
 Course: CST8002 Programming Language Research Project
 Professor: Stanley Pieda
+Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
@@ -42,8 +43,10 @@ func MenuLoop() {
 		case 2:
 			business.SavePreyRecords()
 		case 3:
-			index, _ := userInput.GetNumber("Please enter the index of the record to display: ")
-			business.DisplayPreyRecords(index)
+			indexes, _ := userInput.GetNumbers("Please enter record indexes to display, separated by commas: ")
+			for _, index := range indexes {
+				business.DisplayPreyRecords(index)
+			}
 		case 4:
 			business.AppendPreyRecord()
 		case 5:
