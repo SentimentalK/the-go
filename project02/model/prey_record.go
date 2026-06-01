@@ -25,3 +25,7 @@ type PreyRecord struct {
 	AssociatedCommunity string
 	Retinol             string
 }
+
+type Prey struct {
+	Records []PreyRecord
+}

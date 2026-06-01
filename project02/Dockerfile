@@ -2,13 +2,7 @@ FROM golang:1.23-alpine
 
 WORKDIR /app
 
-COPY main.go .
-COPY go.mod .
-COPY data ./data
-COPY model ./model
-COPY business ./business
-COPY persistence ./persistence
-COPY presentation ./presentation
+COPY . .
 
 RUN go build -o proj2 .
 

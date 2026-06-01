@@ -1,33 +1,12 @@
 package presentation
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"project02/business"
-	"strings"
+	"project02/model"
 )
 
-func GetUserInput(reader *bufio.Reader) (int, error) {
-	for {
-		fmt.Print("Please enter a number: ")
-		input, err := reader.ReadString('\n')
-		if err != nil {
-			return 0, err
-		}
-
-		var n int
-		if _, err := fmt.Sscanf(strings.TrimSpace(input), "%d", &n); err != nil {
-			fmt.Println("Invalid input. Please enter a number.")
-			continue
-		}
-
-		return n, nil
-	}
-}
-
 func MenuLoop() {
-	reader := bufio.NewReader(os.Stdin)
+	userInput := NewConsoleInput()
 
 	for {
 		fmt.Println("\nProgram by Xinghan Xu")
@@ -39,35 +18,35 @@ func MenuLoop() {
 		fmt.Println("6. Delete a record")
 		fmt.Println("7. Exit")
 
-		choice, err := GetUserInput(reader)
+		choice, err := userInput.GetNumber("Please enter your choice: ")
 		if err != nil {
 			fmt.Println("\nExiting program.")
 			return
 		}
 
-		var records []business.PreyRecord
+		var records []model.PreyRecord
 
 		switch choice {
-		case 1:
-			records, _ = business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
-		case 2:
-			business.SavePreyRecords(records)
-		case 3:
-			index, _ := GetUserInput(reader)
-			business.DisplayPreyRecords(index, records)
-		case 4:
-			business.CreatePreyRecord()
-		case 5:
-			index, _ := GetUserInput(reader)
-			business.EditPreyRecord(index)
-		case 6:
-			index, _ := GetUserInput(reader)
-			business.DeletePreyRecord(&records, index)
-		case 7:
-			fmt.Println("Exiting program.")
-			return
-		default:
-			fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
+			case 1:
+				records, _ = business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
+			case 2:
+				business.SavePreyRecords(records)
+			case 3:
+				index, _ := userInput.GetNumber("Please enter the index of the record to display: ")
+				business.DisplayPreyRecords(index, records)
+			case 4:
+				business.AppendPreyRecord()
+			case 5:
+				index, _ := userInput.GetNumber("Please enter the index of the record to edit: ")
+				business.EditPreyRecord(index)
+			case 6:
+				index, _ := userInput.GetNumber("Please enter the index of the record to delete: ")
+				business.DeletePreyRecord(index)
+			case 7:
+				fmt.Println("Exiting program.")
+				return
+			default:
+				fmt.Println("Invalid choice. Please enter a number between 1 and 7.")
 		}
 	}
 }
