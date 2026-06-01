@@ -20,9 +20,10 @@ import (
 // MenuLoop displays the console menu and routes each option to the business layer.
 func MenuLoop() {
 	userInput := user.NewConsoleInput()
+	business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
 
 	for {
-		fmt.Println("\nProgram by Xinghan Xu")
+		fmt.Println("Program by Xinghan Xu")
 		fmt.Println("1. Reload data from dataset")
 		fmt.Println("2. Save current data to new CSV file")
 		fmt.Println("3. Display records")
@@ -37,7 +38,6 @@ func MenuLoop() {
 			return
 		}
 
-		business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
 
 		switch choice {
 		case 1:

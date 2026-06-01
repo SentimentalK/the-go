@@ -129,5 +129,6 @@ func WriteToCSV(records []model.PreyRecord) error {
 		}
 	}
 
+	fmt.Printf("Records saved to %s\n\n", filePath)
 	return nil
 }
