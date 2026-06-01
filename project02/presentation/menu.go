@@ -1,3 +1,13 @@
+/*
+Author: Xinghan Xu
+Course: CST8002 Programming Language Research Project
+Professor: Stanley Pieda
+
+References:
+[1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/fmt [Accessed on: May 2026].
+*/
+
 package presentation
 
 import (
@@ -6,6 +16,7 @@ import (
 	"project02/presentation/user"
 )
 
+// MenuLoop displays the console menu and routes each option to the business layer.
 func MenuLoop() {
 	userInput := user.NewConsoleInput()
 

@@ -20,7 +20,7 @@ import (
 	"project02/presentation"
 )
 
-// main reads a fixed number of prey records from the CSV file and prints them.
+// main starts the project menu.
 func main() {
 	presentation.MenuLoop()
 }
