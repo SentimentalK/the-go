@@ -17,36 +17,11 @@ References:
 package main
 
 import (
-	"fmt"
 	"project02/persistence"
+	"project02/presentation"
 )
 
 // main reads a fixed number of prey records from the CSV file and prints them.
 func main() {
-	// Automatically detect type of variable based on assigned value
-	studentName := "Xinghan Xu"
-	// Explicitly declare type of variable
-	var filePath string = "./data/Prey collection & analysis - raw data.csv"
-	// Constants
-	const studentID = "041164952"
-
-	records, err := persistence.ReadLinesFor(5, filePath)
-	if err != nil {
-		fmt.Println("Error reading CSV file:", err)
-		return
-	}
-
-	fmt.Println(studentName, ":", studentID)
-	fmt.Println("Total records read:", len(records))
-	fmt.Println("---")
-	for _, record := range records {
-		fmt.Println("Year:", record.Year)
-		fmt.Println("Species:", record.Species)
-		fmt.Println("Common Name:", record.CommonName)
-		fmt.Println("Study Site:", record.StudySite)
-		fmt.Println("Associated Community:", record.AssociatedCommunity)
-		fmt.Println("Retinol:", record.Retinol)
-		fmt.Println("---")
-	}
-
+	presentation.MenuLoop()
 }

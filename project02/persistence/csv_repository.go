@@ -23,7 +23,7 @@ import (
 )
 
 // ReadLinesFor reads up to n prey records from the CSV file at filePath.
-func ReadLinesFor(filePath string) ([]model.PreyRecord, error) {
+func ReadLinesFor(n int = 100, filePath string) ([]model.PreyRecord, error) {
 
 	records := []model.PreyRecord{}
 
@@ -40,7 +40,7 @@ func ReadLinesFor(filePath string) ([]model.PreyRecord, error) {
 		return nil, err
 	}
 
-	limit := 100
+	limit := n
 	for index, row := range rows {
 		if index < 1 {
 			continue
