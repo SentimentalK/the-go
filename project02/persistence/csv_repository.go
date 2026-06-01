@@ -18,8 +18,11 @@ package persistence
 
 import (
 	"encoding/csv"
+	"fmt"
 	"os"
 	"project02/model"
+
+	"github.com/google/uuid"
 )
 
 // ReadLinesFor reads up to n prey records from the CSV file at filePath.
@@ -62,8 +65,9 @@ func ReadLinesFor(n int, filePath string) ([]model.PreyRecord, error) {
 	return records, nil
 }
 
-func WriteToCSV(filePath string, records []model.PreyRecord) error {
+func WriteToCSV(records []model.PreyRecord) error {
 	// Create or overwrite the CSV file
+	filePath := fmt.Sprintf("data/prey_records_%s.csv", uuid.NewString())
 	file, err := os.Create(filePath)
 	if err != nil {
 		return err

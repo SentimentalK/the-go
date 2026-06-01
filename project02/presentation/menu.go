@@ -45,20 +45,24 @@ func MenuLoop() {
 			return
 		}
 
+		var records []business.PreyRecord
+
 		switch choice {
 		case 1:
-			business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
+			records, _ = business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
 		case 2:
-			business.SavePreyRecords("data/prey_records.csv", nil)
+			business.SavePreyRecords(records)
 		case 3:
 			index, _ := GetUserInput(reader)
-			business.DisplayPreyRecords(index, nil)
+			business.DisplayPreyRecords(index, records)
 		case 4:
 			business.CreatePreyRecord()
 		case 5:
-			business.EditPreyRecord(nil)
+			index, _ := GetUserInput(reader)
+			business.EditPreyRecord(index)
 		case 6:
-			business.DeletePreyRecord(nil, 0)
+			index, _ := GetUserInput(reader)
+			business.DeletePreyRecord(&records, index)
 		case 7:
 			fmt.Println("Exiting program.")
 			return
