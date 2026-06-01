@@ -6,16 +6,16 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package csv. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/encoding/csv [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/encoding/csv [Accessed on: June 1, 2026].
 
 [2] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/fmt [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/fmt [Accessed on: June 1, 2026].
 
 [3] The Go Authors. (n.d.). Package os. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/os [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/os [Accessed on: June 1, 2026].
 
 [4] Google. (n.d.). Package uuid. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/github.com/google/uuid [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/github.com/google/uuid [Accessed on: June 1, 2026].
 
 [5] Fisheries and Oceans Canada. (2024, Dec. 16). Spatiotemporal variation in anadromous Arctic char (Salvelinus alpinus) foraging ecology and its influence on muscle pigmentation along western Hudson Bay, Nunavut, Canada. open.canada.ca.
     [online]. Available at https://open.canada.ca/data/en/dataset/9cbcf710-a2a1-11ef-8ccf-55cc7f028297 [Accessed on: Apr. 30, 2026].
@@ -96,7 +96,6 @@ func WriteToCSV(records []model.PreyRecord) error {
 	defer file.Close()
 
 	writer := csv.NewWriter(file)
-	defer writer.Flush()
 
 	// Write header
 	header := []string{"Year", "Species", "Common Name", "Study Site", "Associated Community", "Lat", "Long", "Delta13C", "Delta13Cc", "Delta15N", "Delta15Nc", "TP", "C:N", "Astaxanthin", "Canthaxanthin", "Retinol"}
@@ -127,6 +126,11 @@ func WriteToCSV(records []model.PreyRecord) error {
 		if err := writer.Write(row); err != nil {
 			return err
 		}
+	}
+
+	writer.Flush()
+	if err := writer.Error(); err != nil {
+		return err
 	}
 
 	fmt.Printf("Records saved to %s\n\n", filePath)

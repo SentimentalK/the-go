@@ -6,13 +6,13 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package filepath. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/path/filepath [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/path/filepath [Accessed on: June 1, 2026].
 
 [2] The Go Authors. (n.d.). Package regexp. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/regexp [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/regexp [Accessed on: June 1, 2026].
 
 [3] The Go Authors. (n.d.). Package testing. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/testing [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/testing [Accessed on: June 1, 2026].
 */
 
 package tests

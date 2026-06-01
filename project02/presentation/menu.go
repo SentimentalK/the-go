@@ -6,7 +6,7 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/fmt [Accessed on: May 2026].
+    [online]. Available at https://pkg.go.dev/fmt [Accessed on: June 1, 2026].
 */
 
 package presentation
@@ -20,7 +20,9 @@ import (
 // MenuLoop displays the console menu and routes each option to the business layer.
 func MenuLoop() {
 	userInput := user.NewConsoleInput()
-	business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
+	if _, err := business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv"); err != nil {
+		fmt.Println("Error loading records:", err)
+	}
 
 	for {
 		fmt.Println("Program by Xinghan Xu")
@@ -38,12 +40,15 @@ func MenuLoop() {
 			return
 		}
 
-
 		switch choice {
 		case 1:
-			business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
+			if _, err := business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv"); err != nil {
+				fmt.Println("Error loading records:", err)
+			}
 		case 2:
-			business.SavePreyRecords()
+			if err := business.SavePreyRecords(); err != nil {
+				fmt.Println("Error saving records:", err)
+			}
 		case 3:
 			indexes, _ := userInput.GetNumbers("Please enter record indexes to display, separated by commas: ")
 			for _, index := range indexes {
