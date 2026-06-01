@@ -12,7 +12,7 @@ func SavePreyRecords(filePath string, records []model.PreyRecord) error {
 	return nil
 }
 
-func DisplayPreyRecords(records []model.PreyRecord) {
+func DisplayPreyRecords(index int, records []model.PreyRecord) {
 }
 
 func CreatePreyRecord() model.PreyRecord {
