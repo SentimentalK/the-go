@@ -6,7 +6,6 @@ COPY main.go .
 COPY go.mod .
 COPY data ./data
 COPY model ./model
-COPY utils ./utils
 COPY business ./business
 COPY persistence ./persistence
 COPY presentation ./presentation

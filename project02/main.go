@@ -18,7 +18,7 @@ package main
 
 import (
 	"fmt"
-	"project02/utils"
+	"project02/persistence"
 )
 
 // main reads a fixed number of prey records from the CSV file and prints them.
@@ -30,7 +30,7 @@ func main() {
 	// Constants
 	const studentID = "041164952"
 
-	records, err := utils.ReadLinesFor(5, filePath)
+	records, err := persistence.ReadLinesFor(5, filePath)
 	if err != nil {
 		fmt.Println("Error reading CSV file:", err)
 		return
