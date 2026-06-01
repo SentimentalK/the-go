@@ -21,8 +21,8 @@ import (
 func MenuLoop() {
 	userInput := user.NewConsoleInput()
 
-	fmt.Println("\nProgram by Xinghan Xu")
 	for {
+		fmt.Println("\nProgram by Xinghan Xu")
 		fmt.Println("1. Reload data from dataset")
 		fmt.Println("2. Save current data to new CSV file")
 		fmt.Println("3. Display records")
@@ -36,6 +36,8 @@ func MenuLoop() {
 			fmt.Println("\nExiting program.")
 			return
 		}
+
+		business.LoadPreyRecords("./data/Prey collection & analysis - raw data.csv")
 
 		switch choice {
 		case 1:

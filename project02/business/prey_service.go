@@ -8,7 +8,10 @@ References:
 [1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
     [online]. Available at https://pkg.go.dev/fmt [Accessed on: May 2026].
 
-[2] Fisheries and Oceans Canada. (2024, Dec. 16). Spatiotemporal variation in anadromous Arctic char (Salvelinus alpinus) foraging ecology and its influence on muscle pigmentation along western Hudson Bay, Nunavut, Canada. open.canada.ca.
+[2] The Go Authors. (n.d.). Package reflect. pkg.go.dev.
+    [online]. Available at https://pkg.go.dev/reflect [Accessed on: May 2026].
+
+[3] Fisheries and Oceans Canada. (2024, Dec. 16). Spatiotemporal variation in anadromous Arctic char (Salvelinus alpinus) foraging ecology and its influence on muscle pigmentation along western Hudson Bay, Nunavut, Canada. open.canada.ca.
     [online]. Available at https://open.canada.ca/data/en/dataset/9cbcf710-a2a1-11ef-8ccf-55cc7f028297 [Accessed on: Apr. 30, 2026].
 */
 
@@ -19,6 +22,7 @@ import (
 	"project02/model"
 	"project02/persistence"
 	"project02/presentation/user"
+	"reflect"
 )
 
 // Prey stores the current in-memory collection of prey records.
@@ -52,32 +56,32 @@ func SavePreyRecords() error {
 
 // DisplayPreyRecords prints one prey record by its one-based index.
 func DisplayPreyRecords(index int) {
-
 	if index < 1 || index > len(prey.Records) {
 		fmt.Printf("Invalid index. Please enter a number between 1 and %d.\n", len(prey.Records))
 		return
 	}
 
 	record := prey.Records[index-1]
+	recordValue := reflect.ValueOf(record)
+	recordType := recordValue.Type()
+
 	fmt.Printf("\n--Record %d:--\n", index)
-	fmt.Printf("Year: %s\n", record.Year)
-	fmt.Printf("Species: %s\n", record.Species)
-	fmt.Printf("Common Name: %s\n", record.CommonName)
-	fmt.Printf("Study Site: %s\n", record.StudySite)
-	fmt.Printf("Associated Community: %s\n", record.AssociatedCommunity)
-	fmt.Printf("Retinol: %s\n---\n\n", record.Retinol)
+	for fieldIndex := 0; fieldIndex < recordValue.NumField(); fieldIndex++ {
+		fmt.Printf("%s: %s\n", recordType.Field(fieldIndex).Name, recordValue.Field(fieldIndex).String())
+	}
+	fmt.Print("---\n\n")
 }
 
 // CreatePreyRecord asks the user for record values and returns a new prey record.
 func CreatePreyRecord() model.PreyRecord {
 	var record model.PreyRecord
+	recordValue := reflect.ValueOf(&record).Elem()
+	recordType := recordValue.Type()
 
-	record.Year, _ = userInput.GetText("Enter Year: ")
-	record.Species, _ = userInput.GetText("Enter Species: ")
-	record.CommonName, _ = userInput.GetText("Enter Common Name: ")
-	record.StudySite, _ = userInput.GetText("Enter Study Site: ")
-	record.AssociatedCommunity, _ = userInput.GetText("Enter Associated Community: ")
-	record.Retinol, _ = userInput.GetText("Enter Retinol: ")
+	for fieldIndex := 0; fieldIndex < recordValue.NumField(); fieldIndex++ {
+		text, _ := userInput.GetText(fmt.Sprintf("Enter %s: ", recordType.Field(fieldIndex).Name))
+		recordValue.Field(fieldIndex).SetString(text)
+	}
 
 	return record
 }

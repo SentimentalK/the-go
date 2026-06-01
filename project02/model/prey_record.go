@@ -17,12 +17,22 @@ References:
 
 package model
 
-// PreyRecord stores selected values from one row of the prey CSV data.
+// PreyRecord stores all values from one row of the prey CSV data.
 type PreyRecord struct {
 	Year                string
 	Species             string
 	CommonName          string
 	StudySite           string
 	AssociatedCommunity string
+	Lat                 string
+	Long                string
+	Delta13C            string
+	Delta13Cc           string
+	Delta15N            string
+	Delta15Nc           string
+	TP                  string
+	CN                  string
+	AstaxanthinMgKg     string
+	CanthaxanthinMgKg   string
 	Retinol             string
 }

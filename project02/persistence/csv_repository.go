@@ -55,13 +55,26 @@ func ReadLinesFor(n int, filePath string) ([]model.PreyRecord, error) {
 		if index < 1 {
 			continue
 		}
+		if len(row) < 16 {
+			return nil, fmt.Errorf("row %d has %d columns; expected at least 16", index+1, len(row))
+		}
 		record := model.PreyRecord{
 			Year:                row[0],
 			Species:             row[1],
 			CommonName:          row[2],
 			StudySite:           row[3],
 			AssociatedCommunity: row[4],
-			Retinol:             row[5],
+			Lat:                 row[5],
+			Long:                row[6],
+			Delta13C:            row[7],
+			Delta13Cc:           row[8],
+			Delta15N:            row[9],
+			Delta15Nc:           row[10],
+			TP:                  row[11],
+			CN:                  row[12],
+			AstaxanthinMgKg:     row[13],
+			CanthaxanthinMgKg:   row[14],
+			Retinol:             row[15],
 		}
 		records = append(records, record)
 		if index >= limit {
@@ -86,14 +99,31 @@ func WriteToCSV(records []model.PreyRecord) error {
 	defer writer.Flush()
 
 	// Write header
-	header := []string{"Year", "Species", "Common Name", "Study Site", "Associated Community", "Retinol"}
+	header := []string{"Year", "Species", "Common Name", "Study Site", "Associated Community", "Lat", "Long", "Delta13C", "Delta13Cc", "Delta15N", "Delta15Nc", "TP", "C:N", "Astaxanthin", "Canthaxanthin", "Retinol"}
 	if err := writer.Write(header); err != nil {
 		return err
 	}
 
 	// Write records
 	for _, record := range records {
-		row := []string{record.Year, record.Species, record.CommonName, record.StudySite, record.AssociatedCommunity, record.Retinol}
+		row := []string{
+			record.Year,
+			record.Species,
+			record.CommonName,
+			record.StudySite,
+			record.AssociatedCommunity,
+			record.Lat,
+			record.Long,
+			record.Delta13C,
+			record.Delta13Cc,
+			record.Delta15N,
+			record.Delta15Nc,
+			record.TP,
+			record.CN,
+			record.AstaxanthinMgKg,
+			record.CanthaxanthinMgKg,
+			record.Retinol,
+		}
 		if err := writer.Write(row); err != nil {
 			return err
 		}
