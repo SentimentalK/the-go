@@ -6,19 +6,19 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package bufio. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/bufio [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/bufio [Accessed on: June 15, 2026].
 
 [2] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/fmt [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/fmt [Accessed on: June 15, 2026].
 
 [3] The Go Authors. (n.d.). Package os. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/os [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/os [Accessed on: June 15, 2026].
 
 [4] The Go Authors. (n.d.). Package strings. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/strings [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/strings [Accessed on: June 15, 2026].
 
 [5] The Go Authors. (n.d.). Package strconv. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/strconv [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/strconv [Accessed on: June 15, 2026].
 */
 
 package user

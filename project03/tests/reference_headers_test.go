@@ -6,13 +6,13 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package filepath. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/path/filepath [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/path/filepath [Accessed on: June 15, 2026].
 
 [2] The Go Authors. (n.d.). Package regexp. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/regexp [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/regexp [Accessed on: June 15, 2026].
 
 [3] The Go Authors. (n.d.). Package testing. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/testing [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/testing [Accessed on: June 15, 2026].
 */
 
 package tests
@@ -41,7 +41,7 @@ func TestGoFilesHaveRequiredReferenceHeaders(t *testing.T) {
 
 	// Matches the required website reference format:
 	// Author. (date). Title. domain. [Online]. Available at URL [Accessed on: date].
-	referencePattern := regexp.MustCompile(`(?m)^\[\d+\] .+\. \((n\.d\.|\d{4}(, [A-Z][a-z]{2}\. \d{1,2})?)\)\. .+\. [A-Za-z0-9.-]+\.\n\s+\[online\]\. Available at https?://\S+ \[Accessed on: .+\]\.$`)
+	referencePattern := regexp.MustCompile(`(?m)^\[\d+\] .+\. \((n\.d\.|\d{4}(, [A-Z][a-z]{2}\. \d{1,2})?)\)\. .+\. [A-Za-z0-9.-]+\.\n\s+\[Online\]\. Available at https?://\S+ \[Accessed on: .+\]\.$`)
 
 	err := filepath.WalkDir(projectRoot, func(path string, entry os.DirEntry, err error) error {
 		if err != nil {

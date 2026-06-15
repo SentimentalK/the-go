@@ -6,12 +6,21 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package fmt. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/fmt [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/fmt [Accessed on: June 15, 2026].
 
 [2] The Go Authors. (n.d.). Package reflect. pkg.go.dev.
-    [Online]. Available at https://pkg.go.dev/reflect [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/reflect [Accessed on: June 15, 2026].
 
-[3] Fisheries and Oceans Canada. (2024, Dec. 16). Spatiotemporal variation in anadromous Arctic char (Salvelinus alpinus) foraging ecology and its influence on muscle pigmentation along western Hudson Bay, Nunavut, Canada. open.canada.ca.
+[3] The Go Authors. (n.d.). Package sort. pkg.go.dev.
+    [Online]. Available at https://pkg.go.dev/sort [Accessed on: June 15, 2026].
+
+[4] The Go Authors. (n.d.). Package strconv. pkg.go.dev.
+    [Online]. Available at https://pkg.go.dev/strconv [Accessed on: June 15, 2026].
+
+[5] The Go Authors. (n.d.). Package strings. pkg.go.dev.
+    [Online]. Available at https://pkg.go.dev/strings [Accessed on: June 15, 2026].
+
+[6] Fisheries and Oceans Canada. (2024, Dec. 16). Spatiotemporal variation in anadromous Arctic char (Salvelinus alpinus) foraging ecology and its influence on muscle pigmentation along western Hudson Bay, Nunavut, Canada. open.canada.ca.
     [Online]. Available at https://open.canada.ca/data/en/dataset/9cbcf710-a2a1-11ef-8ccf-55cc7f028297 [Accessed on: Apr. 30, 2026].
 */
 
