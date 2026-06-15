@@ -6,7 +6,7 @@ Due Date: June 21, 2026
 
 References:
 [1] The Go Authors. (n.d.). Package testing. pkg.go.dev.
-    [online]. Available at https://pkg.go.dev/testing [Accessed on: June 1, 2026].
+    [Online]. Available at https://pkg.go.dev/testing [Accessed on: June 1, 2026].
 */
 
 package tests
