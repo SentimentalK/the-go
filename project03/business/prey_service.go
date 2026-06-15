@@ -23,6 +23,9 @@ import (
 	"project03/persistence"
 	"project03/presentation/user"
 	"reflect"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 // Prey stores the current in-memory collection of prey records.
@@ -115,4 +118,39 @@ func DeletePreyRecord(index int) {
 
 	prey.Records = append(prey.Records[:index-1], prey.Records[index:]...)
 	fmt.Print("Record deleted.\n\n")
+}
+
+// SortPreyRecordsByLat sorts the in-memory prey records by the Lat column.
+// Go string sorting gives the same kind of result as Python string sorting:
+// both compare text lexicographically. Values like "33 N" and "34 N" look fine,
+// but values with different digit lengths can sort incorrectly, like "100 N"
+// coming before "9 N". Latitudes are parsed as numbers before sorting.
+func SortPreyRecordsByLat() {
+	sort.SliceStable(prey.Records, func(i, j int) bool {
+		latI, errI := parseLatitude(prey.Records[i].Lat)
+		latJ, errJ := parseLatitude(prey.Records[j].Lat)
+		if errI != nil || errJ != nil {
+			return prey.Records[i].Lat < prey.Records[j].Lat
+		}
+
+		return latI < latJ
+	})
+}
+
+func parseLatitude(lat string) (float64, error) {
+	parts := strings.Fields(lat)
+	if len(parts) == 0 {
+		return 0, fmt.Errorf("empty latitude")
+	}
+
+	value, err := strconv.ParseFloat(parts[0], 64)
+	if err != nil {
+		return 0, err
+	}
+
+	if len(parts) > 1 && strings.EqualFold(parts[1], "S") {
+		value = -value
+	}
+
+	return value, nil
 }

@@ -32,7 +32,8 @@ func MenuLoop() {
 		fmt.Println("4. Create new record")
 		fmt.Println("5. Edit a record")
 		fmt.Println("6. Delete a record")
-		fmt.Println("7. Exit")
+		fmt.Println("7. Sort records by Lat")
+		fmt.Println("8. Exit")
 
 		choice, err := userInput.GetNumber("Please enter your choice: ")
 		if err != nil {
@@ -63,6 +64,9 @@ func MenuLoop() {
 			index, _ := userInput.GetNumber("Please enter the index of the record to delete: ")
 			business.DeletePreyRecord(index)
 		case 7:
+			business.SortPreyRecordsByLat()
+			fmt.Print("Records sorted by Lat.\n\n")
+		case 8:
 			fmt.Println("Exiting program.")
 			return
 		default:
